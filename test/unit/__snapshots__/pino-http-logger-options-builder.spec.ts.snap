@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pino-http-logger-options-builder must build options with defaults 1`] = `
+Object {
+  "autoLogging": Object {
+    "getPath": [Function],
+    "ignorePaths": Array [
+      "/metrics",
+      "/_healthz",
+      "/_readiness",
+    ],
+  },
+  "logger": undefined,
+  "reqCustomProps": [Function],
+  "wrapSerializers": false,
+}
+`;
+
+exports[`pino-http-logger-options-builder must build options without defaults 1`] = `
+Object {
+  "autoLogging": Object {
+    "getPath": [Function],
+    "ignorePaths": Array [],
+  },
+  "logger": undefined,
+  "reqCustomProps": [Function],
+  "wrapSerializers": false,
+}
+`;

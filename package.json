@@ -1,0 +1,126 @@
+{
+  "name": "@byndyusoft/pino-logger-factory",
+  "version": "0.0.0-development",
+  "description": "logger factory for pino",
+  "keywords": [
+    "pino",
+    "logger"
+  ],
+  "homepage": "https://github.com/Byndyusoft/node-pino-logger-factory#readme",
+  "bugs": {
+    "url": "https://github.com/Byndyusoft/node-pino-logger-factory/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Byndyusoft/node-pino-logger-factory.git"
+  },
+  "license": "MIT",
+  "author": "Byndyusoft",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "index.ts"
+  ],
+  "scripts": {
+    "prebuild": "shx rm -rf ./dist",
+    "build": "tsc --project ./tsconfig.build.json",
+    "lint": "yarn run lint:eslint && yarn run lint:markdown && yarn run lint:prettier",
+    "lint:eslint": "eslint --ignore-path ./.gitignore --max-warnings 0 --ext .ts,.js .",
+    "lint:eslint:fix": "eslint --ignore-path ./.gitignore --fix --ext .ts,.js .",
+    "lint:fix": "yarn run lint:eslint:fix && yarn run lint:markdown:fix && yarn run lint:prettier:fix",
+    "lint:markdown": "markdownlint --ignore-path ./.gitignore \"./**/*.md\"",
+    "lint:markdown:fix": "markdownlint --ignore-path ./.gitignore --fix \"./**/*.md\"",
+    "lint:prettier": "prettier --ignore-path ./.gitignore --check \"./**/*.{ts,js,json,yaml,yml,md}\"",
+    "lint:prettier:fix": "prettier --ignore-path ./.gitignore --write \"./**/*.{ts,js,json,yaml,yml,md}\"",
+    "postinstall": "husky install && shx rm -rf .git/hooks && shx ln -s ../.husky .git/hooks",
+    "postpublish": "pinst --enable",
+    "prepublishOnly": "shx rm ./dist/tsconfig.build.tsbuildinfo && pinst --disable",
+    "test": "jest",
+    "test:cov": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "./src/**/*.ts",
+      "!**/index.ts"
+    ],
+    "coverageDirectory": "<rootDir>/coverage",
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "rootDir": "./",
+    "roots": [
+      "<rootDir>/src",
+      "<rootDir>/test"
+    ],
+    "setupFilesAfterEnv": [
+      "./test/env.setup.ts"
+    ],
+    "testEnvironment": "node",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    }
+  },
+  "dependencies": {
+    "camel-case": "^4.1.2",
+    "murmurhash": "^2.0.0",
+    "pino": "^6.11.3",
+    "pino-http": "^5.5.0",
+    "pino-pretty": "^4.8.0",
+    "quick-format-unescaped": "^4.0.3",
+    "tslib": "^2.2.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@tsconfig/node12": "^1.0.7",
+    "@types/express": "^4.17.11",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.6.0",
+    "@types/pino": "^6.3.8",
+    "@types/pino-http": "^5.4.1",
+    "@types/quick-format-unescaped": "^4.0.0",
+    "@types/supertest": "^2.0.11",
+    "@typescript-eslint/eslint-plugin": "^4.24.0",
+    "@typescript-eslint/parser": "^4.24.0",
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.3",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "express": "^4.17.1",
+    "husky": "^6.0.0",
+    "jest": "^26.6.3",
+    "jest-mock-extended": "^1.0.15",
+    "lint-staged": "^11.0.0",
+    "markdownlint-cli": "^0.27.1",
+    "opentracing": "^0.14.5",
+    "prettier": "^2.3.0",
+    "prettier-plugin-packagejson": "^2.2.11",
+    "semantic-release": "^17.4.3",
+    "shx": "^0.3.3",
+    "stdout-stderr": "^0.1.13",
+    "supertest": "^6.1.3",
+    "ts-jest": "^26.5.6",
+    "typescript": "^4.2.4"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
