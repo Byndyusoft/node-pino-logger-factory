@@ -1,0 +1,27 @@
+{
+  "extends": "@tsconfig/node12/tsconfig.json",
+  "compilerOptions": {
+    // Project Options
+    "declaration": true,
+    "declarationMap": true,
+    "importHelpers": true,
+    "incremental": true,
+    "outDir": "./dist",
+    "removeComments": true,
+    "sourceMap": true,
+    // Linter Checks
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    // Experimental
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    // Advanced
+    "allowUnreachableCode": false,
+    "newLine": "lf",
+    "preserveConstEnums": true
+  },
+  "exclude": ["./dist", "./node_modules"],
+  "include": ["./**/*.ts"]
+}

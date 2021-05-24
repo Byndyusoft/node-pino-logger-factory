@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pino-logger-factory must build pino with custom options 1`] = `
+Object {
+  "hash": "248bfa47",
+  "level": "info",
+  "msg": "hello",
+  "time": "2016-04-05T17:02:19.796Z",
+}
+`;
+
+exports[`pino-logger-factory must build pino with default options 1`] = `
+Object {
+  "env": "test",
+  "hash": "248bfa47",
+  "hostname": "host",
+  "level": "info",
+  "msg": "hello",
+  "name": "name",
+  "pid": 123456,
+  "time": "2016-04-05T17:02:19.796Z",
+  "version": "version",
+}
+`;
