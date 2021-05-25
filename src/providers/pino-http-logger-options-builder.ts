@@ -2,11 +2,7 @@ import {Span} from "opentracing";
 import {Logger} from "pino";
 import {Options} from "pino-http";
 
-import {IPinoHttpLoggerOptionsBuilder} from "../interfaces";
-
-export class PinoHttpLoggerOptionsBuilder
-  implements IPinoHttpLoggerOptionsBuilder
-{
+export class PinoHttpLoggerOptionsBuilder {
   protected _customProps: Array<
     (request: unknown, response: unknown) => Record<string, unknown>
   > = [];
