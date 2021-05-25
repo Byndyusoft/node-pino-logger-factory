@@ -90,7 +90,6 @@
     "@types/node": "^15.6.1",
     "@types/pino": "^6.3.8",
     "@types/pino-http": "^5.4.1",
-    "@types/quick-format-unescaped": "^4.0.0",
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",
