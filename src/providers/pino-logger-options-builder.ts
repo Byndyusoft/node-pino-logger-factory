@@ -2,16 +2,18 @@ import os from "os";
 
 import {camelCase} from "camel-case";
 import murmurhash from "murmurhash";
-import pino, {LogFn, LoggerOptions, SerializerFn} from "pino";
-import format from "quick-format-unescaped";
+import pino, {Logger, LoggerOptions, SerializerFn} from "pino";
 
 import {LogLevel} from "../enums";
-import {IPinoLoggerOptionsBuilder} from "../interfaces";
 
-export class PinoLoggerOptionsBuilder implements IPinoLoggerOptionsBuilder {
+export class PinoLoggerOptionsBuilder {
   protected _base: Record<string, unknown> = {};
 
   protected _level: LogLevel = LogLevel.info;
+
+  protected _logArgsTransformers: Array<
+    (this: Logger, args: unknown[]) => unknown[]
+  > = [];
 
   protected _prettyPrint = false;
 
@@ -22,12 +24,15 @@ export class PinoLoggerOptionsBuilder implements IPinoLoggerOptionsBuilder {
   public constructor(useDefaults = true) {
     if (useDefaults) {
       this.withDefaultBase();
+      this.withDefaultLogArgsTransformers();
       this.withDefaultRedactPaths();
       this.withDefaultSerializers();
     }
   }
 
   public build(): LoggerOptions {
+    const logArgsTransformers = this._logArgsTransformers;
+
     return {
       serializers: this._serializers,
       timestamp: pino.stdTimeFunctions.isoTime,
@@ -46,48 +51,13 @@ export class PinoLoggerOptionsBuilder implements IPinoLoggerOptionsBuilder {
         level: (level) => ({level}),
       },
       hooks: {
-        logMethod(args: readonly unknown[], method: LogFn) {
-          const [o, ...n] = args;
+        logMethod(this: Logger, args: unknown[], method) {
+          const transformedArgs = logArgsTransformers.reduce(
+            (a, t) => t.call(this, a),
+            args,
+          );
 
-          const formatOptions = (
-            this as unknown as {
-              [pino.symbols.formatOptsSym]: format.Options;
-            }
-          )[pino.symbols.formatOptsSym];
-
-          let formattedObject: Record<string, unknown> | null = null;
-          let formattedMessage: string | undefined;
-          let dataForHash = "";
-
-          if (typeof o === "object") {
-            if (n.length > 0) {
-              const [no, ...nn] = n;
-              formattedMessage = format(no as string, nn, formatOptions);
-            }
-
-            dataForHash = formattedMessage ?? "";
-
-            formattedObject =
-              o instanceof Error ? {err: o} : (o as Record<string, unknown>);
-
-            if (formattedObject.err instanceof Error) {
-              dataForHash = dataForHash.concat(
-                "\n",
-                formattedObject.err.stack ?? "",
-              );
-            }
-          } else {
-            formattedMessage = format(o as string, n, formatOptions);
-            dataForHash = formattedMessage;
-          }
-
-          Reflect.apply(method, this, [
-            {
-              ...formattedObject,
-              hash: murmurhash(dataForHash).toString(16),
-            },
-            formattedMessage,
-          ]);
+          Reflect.apply(method, this, transformedArgs);
         },
       },
     };
@@ -122,6 +92,32 @@ export class PinoLoggerOptionsBuilder implements IPinoLoggerOptionsBuilder {
     });
   }
 
+  public withDefaultLogArgsTransformers(): PinoLoggerOptionsBuilder {
+    return this.withLogArgsTransformers(
+      function (args) {
+        return typeof args[0] === "object" ? args : [{}, ...args];
+      },
+      function (args) {
+        const [o, ...n] = args;
+
+        return o instanceof Error ? [{err: o}, ...n] : args;
+      },
+      function (args) {
+        const [o, ...n] = args as [Record<string, unknown>, ...unknown[]];
+
+        if (o.err instanceof Error) {
+          o.errHash = murmurhash(o.err.stack ?? "").toString(16);
+        }
+
+        if (n.length > 0) {
+          o.msgTemplateHash = murmurhash(n[0] as string).toString(16);
+        }
+
+        return [o, ...n];
+      },
+    );
+  }
+
   public withDefaultRedactPaths(): PinoLoggerOptionsBuilder {
     return this.withRedactPaths("req.headers.authorization");
   }
@@ -136,6 +132,14 @@ export class PinoLoggerOptionsBuilder implements IPinoLoggerOptionsBuilder {
 
   public withLevel(level: LogLevel): PinoLoggerOptionsBuilder {
     this._level = level;
+
+    return this;
+  }
+
+  public withLogArgsTransformers(
+    ...logArgsTransformers: Array<(this: Logger, args: unknown[]) => unknown[]>
+  ): PinoLoggerOptionsBuilder {
+    this._logArgsTransformers.push(...logArgsTransformers);
 
     return this;
   }
