@@ -42,7 +42,9 @@ export class PinoLoggerOptionsBuilder {
         ? {
             translateTime: "SYS:STANDARD",
             colorize: true,
-            ignore: Object.keys(this._base).concat("hash").join(","),
+            ignore: Object.keys(this._base)
+              .concat("errHash", "msgTemplateHash")
+              .join(","),
             suppressFlushSyncWarning: true,
           }
         : false,
