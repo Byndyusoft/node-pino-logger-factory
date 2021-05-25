@@ -78,7 +78,7 @@ describe("pino-logger-options-builder", () => {
   });
 
   it("must log object", () => {
-    const builder = new PinoLoggerOptionsBuilder(false);
+    const builder = new PinoLoggerOptionsBuilder();
 
     stdout.start();
     pino(builder.build()).info({a: 1});
@@ -108,13 +108,13 @@ describe("pino-logger-options-builder", () => {
   });
 
   it("must override level", () => {
-    const builder = new PinoLoggerOptionsBuilder(false);
+    const builder = new PinoLoggerOptionsBuilder();
 
     expect(builder.withLevel(LogLevel.warn).build()).toMatchSnapshot();
   });
 
   it("must override pretty print", () => {
-    const builder = new PinoLoggerOptionsBuilder(false);
+    const builder = new PinoLoggerOptionsBuilder();
 
     expect(builder.withPrettyPrint(true).build()).toMatchSnapshot();
   });

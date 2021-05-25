@@ -125,8 +125,13 @@ Object {
 exports[`pino-logger-options-builder must log object 1`] = `
 Object {
   "a": 1,
+  "env": "test",
+  "hostname": "host",
   "level": "info",
+  "name": "name",
+  "pid": 123456,
   "time": "2016-04-05T17:02:19.796Z",
+  "version": "version",
 }
 `;
 
@@ -162,7 +167,13 @@ Object {
 
 exports[`pino-logger-options-builder must override level 1`] = `
 Object {
-  "base": Object {},
+  "base": Object {
+    "env": "test",
+    "hostname": "host",
+    "name": "name",
+    "pid": 123456,
+    "version": "version",
+  },
   "formatters": Object {
     "level": [Function],
   },
@@ -171,15 +182,27 @@ Object {
   },
   "level": "warn",
   "prettyPrint": false,
-  "redact": Array [],
-  "serializers": Object {},
+  "redact": Array [
+    "req.headers.authorization",
+  ],
+  "serializers": Object {
+    "err": [Function],
+    "req": [Function],
+    "res": [Function],
+  },
   "timestamp": [Function],
 }
 `;
 
 exports[`pino-logger-options-builder must override pretty print 1`] = `
 Object {
-  "base": Object {},
+  "base": Object {
+    "env": "test",
+    "hostname": "host",
+    "name": "name",
+    "pid": 123456,
+    "version": "version",
+  },
   "formatters": Object {
     "level": [Function],
   },
@@ -189,12 +212,18 @@ Object {
   "level": "info",
   "prettyPrint": Object {
     "colorize": true,
-    "ignore": "hash",
+    "ignore": "pid,hostname,name,version,env,errHash,msgTemplateHash",
     "suppressFlushSyncWarning": true,
     "translateTime": "SYS:STANDARD",
   },
-  "redact": Array [],
-  "serializers": Object {},
+  "redact": Array [
+    "req.headers.authorization",
+  ],
+  "serializers": Object {
+    "err": [Function],
+    "req": [Function],
+    "res": [Function],
+  },
   "timestamp": [Function],
 }
 `;
