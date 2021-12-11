@@ -14,6 +14,4 @@
  * limitations under the License.
  */
 
-export * from "./enums";
-export * from "./interfaces";
-export * from "./providers";
+import "jest-extended";

@@ -14,6 +14,20 @@
  * limitations under the License.
  */
 
-export * from "./enums";
-export * from "./interfaces";
-export * from "./providers";
+import { HttpLogger, Options, pinoHttp } from "pino-http";
+
+import { IPinoHttpLoggerFactory } from "~/src/interfaces";
+
+import { PinoHttpLoggerOptionsBuilder } from "./pinoHttpLoggerOptionsBuilder";
+import { PinoLoggerFactory } from "./pinoLoggerFactory";
+
+export class PinoHttpLoggerFactory implements IPinoHttpLoggerFactory {
+  public create(options?: Options): HttpLogger {
+    return pinoHttp(
+      options ??
+        new PinoHttpLoggerOptionsBuilder()
+          .withLogger(new PinoLoggerFactory().create())
+          .build(),
+    );
+  }
+}

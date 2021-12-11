@@ -14,6 +14,14 @@
  * limitations under the License.
  */
 
-export * from "./enums";
-export * from "./interfaces";
-export * from "./providers";
+import { Logger, LoggerOptions, pino } from "pino";
+
+import { IPinoLoggerFactory } from "~/src/interfaces";
+
+import { PinoLoggerOptionsBuilder } from "./pinoLoggerOptionsBuilder";
+
+export class PinoLoggerFactory implements IPinoLoggerFactory {
+  public create(options?: LoggerOptions): Logger {
+    return pino(options ?? new PinoLoggerOptionsBuilder().build());
+  }
+}

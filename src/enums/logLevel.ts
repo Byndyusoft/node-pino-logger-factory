@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
-export * from "./enums";
-export * from "./interfaces";
-export * from "./providers";
+export enum LogLevel {
+  fatal = "fatal",
+  error = "error",
+  warn = "warn",
+  info = "info",
+  debug = "debug",
+  trace = "trace",
+  silent = "silent",
+}

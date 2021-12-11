@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
-export * from "./enums";
-export * from "./interfaces";
-export * from "./providers";
+import { HttpLogger, Options } from "pino-http";
+
+export interface IPinoHttpLoggerFactory {
+  readonly create: (options?: Options) => HttpLogger;
+}
