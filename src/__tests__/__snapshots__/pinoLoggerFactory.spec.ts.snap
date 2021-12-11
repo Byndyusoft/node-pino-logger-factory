@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`pino-logger-factory must build pino with custom options 1`] = `
+exports[`PinoLoggerFactory must build pino with custom options 1`] = `
 Object {
   "level": "info",
   "msg": "hello",
@@ -8,7 +8,7 @@ Object {
 }
 `;
 
-exports[`pino-logger-factory must build pino with default options 1`] = `
+exports[`PinoLoggerFactory must build pino with default options 1`] = `
 Object {
   "env": "test",
   "hostname": "host",

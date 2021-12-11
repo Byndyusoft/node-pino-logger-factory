@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`pino-logger-options-builder must build options with defaults 1`] = `
+exports[`PinoLoggerOptionsBuilder must build options with defaults 1`] = `
 Object {
   "base": Object {
     "env": "test",
@@ -16,7 +16,6 @@ Object {
     "logMethod": [Function],
   },
   "level": "info",
-  "prettyPrint": false,
   "redact": Array [
     "req.headers.authorization",
   ],
@@ -26,10 +25,11 @@ Object {
     "res": [Function],
   },
   "timestamp": [Function],
+  "transport": undefined,
 }
 `;
 
-exports[`pino-logger-options-builder must build options without defaults 1`] = `
+exports[`PinoLoggerOptionsBuilder must build options without defaults 1`] = `
 Object {
   "base": Object {},
   "formatters": Object {
@@ -39,14 +39,14 @@ Object {
     "logMethod": [Function],
   },
   "level": "info",
-  "prettyPrint": false,
   "redact": Array [],
   "serializers": Object {},
   "timestamp": [Function],
+  "transport": undefined,
 }
 `;
 
-exports[`pino-logger-options-builder must log custom error 1`] = `
+exports[`PinoLoggerOptionsBuilder must log custom error 1`] = `
 Object {
   "env": "test",
   "err": "some error",
@@ -59,7 +59,7 @@ Object {
 }
 `;
 
-exports[`pino-logger-options-builder must log error 1`] = `
+exports[`PinoLoggerOptionsBuilder must log error 1`] = `
 Object {
   "env": "test",
   "err": Object {
@@ -70,6 +70,8 @@ Object {
   "errHash": "932f64f7",
   "hostname": "host",
   "level": "error",
+  "msg": "some error",
+  "msgTemplateHash": "7611b3bb",
   "name": "name",
   "pid": 123456,
   "time": "2016-04-05T17:02:19.796Z",
@@ -77,7 +79,27 @@ Object {
 }
 `;
 
-exports[`pino-logger-options-builder must log error without trace 1`] = `
+exports[`PinoLoggerOptionsBuilder must log error with custom message 1`] = `
+Object {
+  "env": "test",
+  "err": Object {
+    "message": "some error",
+    "stack": "Error: some error",
+    "type": "Error",
+  },
+  "errHash": "932f64f7",
+  "hostname": "host",
+  "level": "error",
+  "msg": "custom message",
+  "msgTemplateHash": "90c7844f",
+  "name": "name",
+  "pid": 123456,
+  "time": "2016-04-05T17:02:19.796Z",
+  "version": "version",
+}
+`;
+
+exports[`PinoLoggerOptionsBuilder must log error without trace 1`] = `
 Object {
   "env": "test",
   "err": Object {
@@ -87,6 +109,8 @@ Object {
   "errHash": "0",
   "hostname": "host",
   "level": "error",
+  "msg": "some error",
+  "msgTemplateHash": "7611b3bb",
   "name": "name",
   "pid": 123456,
   "time": "2016-04-05T17:02:19.796Z",
@@ -94,7 +118,7 @@ Object {
 }
 `;
 
-exports[`pino-logger-options-builder must log message 1`] = `
+exports[`PinoLoggerOptionsBuilder must log message 1`] = `
 Object {
   "env": "test",
   "hostname": "host",
@@ -108,7 +132,7 @@ Object {
 }
 `;
 
-exports[`pino-logger-options-builder must log message with args 1`] = `
+exports[`PinoLoggerOptionsBuilder must log message with args 1`] = `
 Object {
   "env": "test",
   "hostname": "host",
@@ -122,7 +146,7 @@ Object {
 }
 `;
 
-exports[`pino-logger-options-builder must log object 1`] = `
+exports[`PinoLoggerOptionsBuilder must log object 1`] = `
 Object {
   "a": 1,
   "env": "test",
@@ -135,7 +159,7 @@ Object {
 }
 `;
 
-exports[`pino-logger-options-builder must log object and message 1`] = `
+exports[`PinoLoggerOptionsBuilder must log object and message 1`] = `
 Object {
   "a": 1,
   "env": "test",
@@ -150,7 +174,7 @@ Object {
 }
 `;
 
-exports[`pino-logger-options-builder must log object and message with args 1`] = `
+exports[`PinoLoggerOptionsBuilder must log object and message with args 1`] = `
 Object {
   "a": 1,
   "env": "test",
@@ -165,7 +189,7 @@ Object {
 }
 `;
 
-exports[`pino-logger-options-builder must override level 1`] = `
+exports[`PinoLoggerOptionsBuilder must override level 1`] = `
 Object {
   "base": Object {
     "env": "test",
@@ -181,7 +205,6 @@ Object {
     "logMethod": [Function],
   },
   "level": "warn",
-  "prettyPrint": false,
   "redact": Array [
     "req.headers.authorization",
   ],
@@ -191,10 +214,11 @@ Object {
     "res": [Function],
   },
   "timestamp": [Function],
+  "transport": undefined,
 }
 `;
 
-exports[`pino-logger-options-builder must override pretty print 1`] = `
+exports[`PinoLoggerOptionsBuilder must override pretty print 1`] = `
 Object {
   "base": Object {
     "env": "test",
@@ -210,12 +234,6 @@ Object {
     "logMethod": [Function],
   },
   "level": "info",
-  "prettyPrint": Object {
-    "colorize": true,
-    "ignore": "pid,hostname,name,version,env,errHash,msgTemplateHash",
-    "suppressFlushSyncWarning": true,
-    "translateTime": "SYS:STANDARD",
-  },
   "redact": Array [
     "req.headers.authorization",
   ],
@@ -225,10 +243,18 @@ Object {
     "res": [Function],
   },
   "timestamp": [Function],
+  "transport": Object {
+    "options": Object {
+      "colorize": true,
+      "ignore": "pid,hostname,name,version,env,errHash,msgTemplateHash",
+      "translateTime": "SYS:STANDARD",
+    },
+    "target": "pino-pretty",
+  },
 }
 `;
 
-exports[`pino-logger-options-builder must use process.env that starts with BUILD_ 1`] = `
+exports[`PinoLoggerOptionsBuilder must use process.env that starts with BUILD_ 1`] = `
 Object {
   "base": Object {
     "commit": "eefc20",
@@ -245,7 +271,6 @@ Object {
     "logMethod": [Function],
   },
   "level": "info",
-  "prettyPrint": false,
   "redact": Array [
     "req.headers.authorization",
   ],
@@ -255,10 +280,11 @@ Object {
     "res": [Function],
   },
   "timestamp": [Function],
+  "transport": undefined,
 }
 `;
 
-exports[`pino-logger-options-builder must use process.env.CASC_ENV if exists 1`] = `
+exports[`PinoLoggerOptionsBuilder must use process.env.CONFIG_ENV if exists 1`] = `
 Object {
   "base": Object {
     "env": "dev",
@@ -274,7 +300,6 @@ Object {
     "logMethod": [Function],
   },
   "level": "info",
-  "prettyPrint": false,
   "redact": Array [
     "req.headers.authorization",
   ],
@@ -284,5 +309,6 @@ Object {
     "res": [Function],
   },
   "timestamp": [Function],
+  "transport": undefined,
 }
 `;

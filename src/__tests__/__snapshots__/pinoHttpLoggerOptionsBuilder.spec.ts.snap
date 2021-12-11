@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`pino-http-logger-options-builder must build options with defaults 1`] = `
+exports[`PinoHttpLoggerOptionsBuilder must build options with defaults 1`] = `
 Object {
   "autoLogging": Object {
     "getPath": [Function],
@@ -16,7 +16,7 @@ Object {
 }
 `;
 
-exports[`pino-http-logger-options-builder must build options without defaults 1`] = `
+exports[`PinoHttpLoggerOptionsBuilder must build options without defaults 1`] = `
 Object {
   "autoLogging": Object {
     "getPath": [Function],

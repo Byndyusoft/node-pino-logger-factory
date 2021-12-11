@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
-export * from "./enums";
-export * from "./interfaces";
-export * from "./providers";
+import { Logger, LoggerOptions } from "pino";
+
+export interface IPinoLoggerFactory {
+  readonly create: (options?: LoggerOptions) => Logger;
+}
