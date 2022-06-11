@@ -24,7 +24,7 @@ export class PinoHttpLoggerOptionsBuilder {
     (request: unknown, response: unknown) => Record<string, unknown>
   > = [];
 
-  protected _ignorePaths: string[] = [];
+  protected _ignorePaths: Set<string> = new Set();
 
   protected _logger?: Logger;
 
@@ -39,11 +39,11 @@ export class PinoHttpLoggerOptionsBuilder {
     return {
       logger: this._logger,
       autoLogging: {
-        ignorePaths: this._ignorePaths,
-        getPath: (request) => (request as Request).originalUrl, // for express
+        ignore: (request) =>
+          this._ignorePaths.has((request as Request).originalUrl), // for express
       },
       wrapSerializers: false,
-      reqCustomProps: (request, response) =>
+      customProps: (request, response) =>
         Object.fromEntries(
           this._customProps.flatMap((x) =>
             Object.entries(x(request, response)),
@@ -77,7 +77,9 @@ export class PinoHttpLoggerOptionsBuilder {
   public withIgnorePaths(
     ...ignorePaths: string[]
   ): PinoHttpLoggerOptionsBuilder {
-    this._ignorePaths.push(...ignorePaths);
+    for (const ignorePath of ignorePaths) {
+      this._ignorePaths.add(ignorePath);
+    }
 
     return this;
   }

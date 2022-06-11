@@ -104,6 +104,7 @@ Object {
   "env": "test",
   "err": Object {
     "message": "some error",
+    "stack": "",
     "type": "Error",
   },
   "errHash": "0",

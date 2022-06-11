@@ -51,20 +51,7 @@ export class PinoLoggerOptionsBuilder {
     const logArgsTransformers = this._logArgsTransformers;
 
     return {
-      transport: this._prettyPrint
-        ? ((): pino.TransportSingleOptions<PrettyOptions> => ({
-            target: "pino-pretty",
-            options: {
-              translateTime: "SYS:STANDARD",
-              colorize: true,
-              ignore: [
-                ...Object.keys(this._base),
-                "errHash",
-                "msgTemplateHash",
-              ].join(","),
-            },
-          }))()
-        : undefined,
+      transport: this.__buildTransport(),
       serializers: this._serializers,
       timestamp: pino.stdTimeFunctions.isoTime,
       level: this._level,
@@ -197,5 +184,24 @@ export class PinoLoggerOptionsBuilder {
     };
 
     return this;
+  }
+
+  private __buildTransport():
+    | pino.TransportSingleOptions<PrettyOptions>
+    | undefined {
+    return this._prettyPrint
+      ? {
+          target: "pino-pretty",
+          options: {
+            translateTime: "SYS:STANDARD",
+            colorize: true,
+            ignore: [
+              ...Object.keys(this._base),
+              "errHash",
+              "msgTemplateHash",
+            ].join(","),
+          },
+        }
+      : undefined;
   }
 }
