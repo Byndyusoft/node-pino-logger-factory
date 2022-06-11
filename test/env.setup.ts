@@ -17,10 +17,18 @@
 import os from "os";
 
 beforeEach(() => {
-  jest.useFakeTimers("modern").setSystemTime(1459875739796);
+  jest.useFakeTimers({
+    now: 1459875739796,
+  });
+
   jest.spyOn(os, "hostname").mockReturnValue("host");
 
-  global.process = { ...process, pid: 123456 };
+  Object.defineProperty(process, "pid", {
+    get() {
+      return 123456;
+    },
+  });
+
   process.env.npm_package_name = "name";
   process.env.npm_package_version = "version";
   process.env.NODE_ENV = "test";

@@ -41,45 +41,43 @@ function createExpressApp(httpLogger: HttpLogger): Express {
 describe("PinoHttpLoggerFactory", () => {
   it("must build pino with custom options", async () => {
     stdout.start();
-    {
-      const httpLogger = new PinoHttpLoggerFactory().create(
-        new PinoHttpLoggerOptionsBuilder()
-          .withLogger(
-            new PinoLoggerFactory().create(
-              new PinoLoggerOptionsBuilder(false).build(),
-            ),
-          )
-          .build(),
-      );
 
-      const app = createExpressApp(httpLogger);
+    const httpLogger = new PinoHttpLoggerFactory().create(
+      new PinoHttpLoggerOptionsBuilder()
+        .withLogger(
+          new PinoLoggerFactory().create(
+            new PinoLoggerOptionsBuilder(false).build(),
+          ),
+        )
+        .build(),
+    );
 
-      await supertest(app).get("/test").expect(204);
-    }
+    const app = createExpressApp(httpLogger);
+    await supertest(app).get("/test").expect(204);
+
     stdout.stop();
 
     const output = JSON.parse(stdout.output) as Record<string, unknown>;
-    expect(output.env).not.toBeDefined();
+    expect(output.env).toBeUndefined();
     expect(output.req).toBeDefined();
     expect(output.res).toBeDefined();
-    expect(output.msg).toStrictEqual("request completed");
+    expect(output.msg).toBe("request completed");
   });
 
   it("must build pino with default options", async () => {
     stdout.start();
-    {
-      const httpLogger = new PinoHttpLoggerFactory().create();
 
-      const app = createExpressApp(httpLogger);
+    const httpLogger = new PinoHttpLoggerFactory().create();
 
-      await supertest(app).get("/test").expect(204);
-    }
+    const app = createExpressApp(httpLogger);
+    await supertest(app).get("/test").expect(204);
+
     stdout.stop();
 
     const output = JSON.parse(stdout.output) as Record<string, unknown>;
-    expect(output.env).toStrictEqual("test");
+    expect(output.env).toBe("test");
     expect(output.req).toBeDefined();
     expect(output.res).toBeDefined();
-    expect(output.msg).toStrictEqual("request completed");
+    expect(output.msg).toBe("request completed");
   });
 });

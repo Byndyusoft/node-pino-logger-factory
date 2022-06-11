@@ -44,14 +44,24 @@ describe("PinoHttpLoggerOptionsBuilder", () => {
     expect(options.logger).toBe(logger);
   });
 
-  it("must return path", () => {
+  it("must ignore path from defaults", () => {
     const options = new PinoHttpLoggerOptionsBuilder().build();
 
     expect(
-      (options.autoLogging as AutoLoggingOptions).getPath?.({
+      (options.autoLogging as AutoLoggingOptions).ignore?.({
+        originalUrl: "/metrics",
+      } as unknown as IncomingMessage),
+    ).toBe(true);
+  });
+
+  it("must don't ignore other path", () => {
+    const options = new PinoHttpLoggerOptionsBuilder().build();
+
+    expect(
+      (options.autoLogging as AutoLoggingOptions).ignore?.({
         originalUrl: "/test",
       } as unknown as IncomingMessage),
-    ).toStrictEqual("/test");
+    ).toBe(false);
   });
 
   it("must set traceId if __rootSpan__ in request", () => {
@@ -61,7 +71,7 @@ describe("PinoHttpLoggerOptionsBuilder", () => {
     const options = new PinoHttpLoggerOptionsBuilder().build();
 
     expect(
-      options.reqCustomProps?.(
+      options.customProps?.(
         { __rootSpan__: span } as unknown as IncomingMessage,
         {} as unknown as ServerResponse,
       ),
@@ -74,7 +84,7 @@ describe("PinoHttpLoggerOptionsBuilder", () => {
     const options = new PinoHttpLoggerOptionsBuilder().build();
 
     expect(
-      options.reqCustomProps?.(
+      options.customProps?.(
         {} as unknown as IncomingMessage,
         {} as unknown as ServerResponse,
       ),

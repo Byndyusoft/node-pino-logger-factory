@@ -3,15 +3,10 @@
 exports[`PinoHttpLoggerOptionsBuilder must build options with defaults 1`] = `
 Object {
   "autoLogging": Object {
-    "getPath": [Function],
-    "ignorePaths": Array [
-      "/metrics",
-      "/_healthz",
-      "/_readiness",
-    ],
+    "ignore": [Function],
   },
+  "customProps": [Function],
   "logger": undefined,
-  "reqCustomProps": [Function],
   "wrapSerializers": false,
 }
 `;
@@ -19,11 +14,10 @@ Object {
 exports[`PinoHttpLoggerOptionsBuilder must build options without defaults 1`] = `
 Object {
   "autoLogging": Object {
-    "getPath": [Function],
-    "ignorePaths": Array [],
+    "ignore": [Function],
   },
+  "customProps": [Function],
   "logger": undefined,
-  "reqCustomProps": [Function],
   "wrapSerializers": false,
 }
 `;
