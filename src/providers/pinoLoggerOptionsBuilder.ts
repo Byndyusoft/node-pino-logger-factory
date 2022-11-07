@@ -138,7 +138,10 @@ export class PinoLoggerOptionsBuilder {
   }
 
   public withDefaultRedactPaths(): PinoLoggerOptionsBuilder {
-    return this.withRedactPaths("req.headers.authorization");
+    return this.withRedactPaths(
+      "req.headers.authorization",
+      "err.config.headers['x-api-key']",
+    );
   }
 
   public withDefaultSerializers(): PinoLoggerOptionsBuilder {

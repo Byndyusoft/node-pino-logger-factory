@@ -18,6 +18,7 @@ Object {
   "level": "info",
   "redact": Array [
     "req.headers.authorization",
+    "err.config.headers['x-api-key']",
   ],
   "serializers": Object {
     "err": [Function],
@@ -208,6 +209,7 @@ Object {
   "level": "warn",
   "redact": Array [
     "req.headers.authorization",
+    "err.config.headers['x-api-key']",
   ],
   "serializers": Object {
     "err": [Function],
@@ -237,6 +239,7 @@ Object {
   "level": "info",
   "redact": Array [
     "req.headers.authorization",
+    "err.config.headers['x-api-key']",
   ],
   "serializers": Object {
     "err": [Function],
@@ -274,6 +277,7 @@ Object {
   "level": "info",
   "redact": Array [
     "req.headers.authorization",
+    "err.config.headers['x-api-key']",
   ],
   "serializers": Object {
     "err": [Function],
@@ -303,6 +307,7 @@ Object {
   "level": "info",
   "redact": Array [
     "req.headers.authorization",
+    "err.config.headers['x-api-key']",
   ],
   "serializers": Object {
     "err": [Function],
