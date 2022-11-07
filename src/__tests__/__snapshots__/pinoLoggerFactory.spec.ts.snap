@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PinoLoggerFactory must build pino with custom options 1`] = `
-Object {
+{
   "level": "info",
   "msg": "hello",
   "time": "2016-04-05T17:02:19.796Z",
@@ -9,7 +9,7 @@ Object {
 `;
 
 exports[`PinoLoggerFactory must build pino with default options 1`] = `
-Object {
+{
   "env": "test",
   "hostname": "host",
   "level": "info",
