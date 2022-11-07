@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PinoHttpLoggerOptionsBuilder must build options with defaults 1`] = `
-Object {
-  "autoLogging": Object {
+{
+  "autoLogging": {
     "ignore": [Function],
   },
   "customProps": [Function],
@@ -12,8 +12,8 @@ Object {
 `;
 
 exports[`PinoHttpLoggerOptionsBuilder must build options without defaults 1`] = `
-Object {
-  "autoLogging": Object {
+{
+  "autoLogging": {
     "ignore": [Function],
   },
   "customProps": [Function],
