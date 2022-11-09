@@ -1,25 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PinoLoggerOptionsBuilder must build options with defaults 1`] = `
-Object {
-  "base": Object {
+{
+  "base": {
     "env": "test",
     "hostname": "host",
     "name": "name",
     "pid": 123456,
     "version": "version",
   },
-  "formatters": Object {
+  "formatters": {
     "level": [Function],
   },
-  "hooks": Object {
+  "hooks": {
     "logMethod": [Function],
   },
   "level": "info",
-  "redact": Array [
+  "redact": [
     "req.headers.authorization",
+    "err.config.headers['x-api-key']",
   ],
-  "serializers": Object {
+  "serializers": {
     "err": [Function],
     "req": [Function],
     "res": [Function],
@@ -30,24 +31,24 @@ Object {
 `;
 
 exports[`PinoLoggerOptionsBuilder must build options without defaults 1`] = `
-Object {
-  "base": Object {},
-  "formatters": Object {
+{
+  "base": {},
+  "formatters": {
     "level": [Function],
   },
-  "hooks": Object {
+  "hooks": {
     "logMethod": [Function],
   },
   "level": "info",
-  "redact": Array [],
-  "serializers": Object {},
+  "redact": [],
+  "serializers": {},
   "timestamp": [Function],
   "transport": undefined,
 }
 `;
 
 exports[`PinoLoggerOptionsBuilder must log custom error 1`] = `
-Object {
+{
   "env": "test",
   "err": "some error",
   "hostname": "host",
@@ -60,9 +61,9 @@ Object {
 `;
 
 exports[`PinoLoggerOptionsBuilder must log error 1`] = `
-Object {
+{
   "env": "test",
-  "err": Object {
+  "err": {
     "message": "some error",
     "stack": "Error: some error",
     "type": "Error",
@@ -80,9 +81,9 @@ Object {
 `;
 
 exports[`PinoLoggerOptionsBuilder must log error with custom message 1`] = `
-Object {
+{
   "env": "test",
-  "err": Object {
+  "err": {
     "message": "some error",
     "stack": "Error: some error",
     "type": "Error",
@@ -100,9 +101,9 @@ Object {
 `;
 
 exports[`PinoLoggerOptionsBuilder must log error without trace 1`] = `
-Object {
+{
   "env": "test",
-  "err": Object {
+  "err": {
     "message": "some error",
     "stack": "",
     "type": "Error",
@@ -120,7 +121,7 @@ Object {
 `;
 
 exports[`PinoLoggerOptionsBuilder must log message 1`] = `
-Object {
+{
   "env": "test",
   "hostname": "host",
   "level": "info",
@@ -134,7 +135,7 @@ Object {
 `;
 
 exports[`PinoLoggerOptionsBuilder must log message with args 1`] = `
-Object {
+{
   "env": "test",
   "hostname": "host",
   "level": "info",
@@ -148,7 +149,7 @@ Object {
 `;
 
 exports[`PinoLoggerOptionsBuilder must log object 1`] = `
-Object {
+{
   "a": 1,
   "env": "test",
   "hostname": "host",
@@ -161,7 +162,7 @@ Object {
 `;
 
 exports[`PinoLoggerOptionsBuilder must log object and message 1`] = `
-Object {
+{
   "a": 1,
   "env": "test",
   "hostname": "host",
@@ -176,7 +177,7 @@ Object {
 `;
 
 exports[`PinoLoggerOptionsBuilder must log object and message with args 1`] = `
-Object {
+{
   "a": 1,
   "env": "test",
   "hostname": "host",
@@ -191,25 +192,26 @@ Object {
 `;
 
 exports[`PinoLoggerOptionsBuilder must override level 1`] = `
-Object {
-  "base": Object {
+{
+  "base": {
     "env": "test",
     "hostname": "host",
     "name": "name",
     "pid": 123456,
     "version": "version",
   },
-  "formatters": Object {
+  "formatters": {
     "level": [Function],
   },
-  "hooks": Object {
+  "hooks": {
     "logMethod": [Function],
   },
   "level": "warn",
-  "redact": Array [
+  "redact": [
     "req.headers.authorization",
+    "err.config.headers['x-api-key']",
   ],
-  "serializers": Object {
+  "serializers": {
     "err": [Function],
     "req": [Function],
     "res": [Function],
@@ -220,32 +222,33 @@ Object {
 `;
 
 exports[`PinoLoggerOptionsBuilder must override pretty print 1`] = `
-Object {
-  "base": Object {
+{
+  "base": {
     "env": "test",
     "hostname": "host",
     "name": "name",
     "pid": 123456,
     "version": "version",
   },
-  "formatters": Object {
+  "formatters": {
     "level": [Function],
   },
-  "hooks": Object {
+  "hooks": {
     "logMethod": [Function],
   },
   "level": "info",
-  "redact": Array [
+  "redact": [
     "req.headers.authorization",
+    "err.config.headers['x-api-key']",
   ],
-  "serializers": Object {
+  "serializers": {
     "err": [Function],
     "req": [Function],
     "res": [Function],
   },
   "timestamp": [Function],
-  "transport": Object {
-    "options": Object {
+  "transport": {
+    "options": {
       "colorize": true,
       "ignore": "pid,hostname,name,version,env,errHash,msgTemplateHash",
       "translateTime": "SYS:STANDARD",
@@ -256,8 +259,8 @@ Object {
 `;
 
 exports[`PinoLoggerOptionsBuilder must use process.env that starts with BUILD_ 1`] = `
-Object {
-  "base": Object {
+{
+  "base": {
     "commit": "eefc20",
     "env": "test",
     "hostname": "host",
@@ -265,17 +268,18 @@ Object {
     "pid": 123456,
     "version": "version",
   },
-  "formatters": Object {
+  "formatters": {
     "level": [Function],
   },
-  "hooks": Object {
+  "hooks": {
     "logMethod": [Function],
   },
   "level": "info",
-  "redact": Array [
+  "redact": [
     "req.headers.authorization",
+    "err.config.headers['x-api-key']",
   ],
-  "serializers": Object {
+  "serializers": {
     "err": [Function],
     "req": [Function],
     "res": [Function],
@@ -286,25 +290,26 @@ Object {
 `;
 
 exports[`PinoLoggerOptionsBuilder must use process.env.CONFIG_ENV if exists 1`] = `
-Object {
-  "base": Object {
+{
+  "base": {
     "env": "dev",
     "hostname": "host",
     "name": "name",
     "pid": 123456,
     "version": "version",
   },
-  "formatters": Object {
+  "formatters": {
     "level": [Function],
   },
-  "hooks": Object {
+  "hooks": {
     "logMethod": [Function],
   },
   "level": "info",
-  "redact": Array [
+  "redact": [
     "req.headers.authorization",
+    "err.config.headers['x-api-key']",
   ],
-  "serializers": Object {
+  "serializers": {
     "err": [Function],
     "req": [Function],
     "res": [Function],
