@@ -19,6 +19,7 @@ exports[`PinoLoggerOptionsBuilder must build options with defaults 1`] = `
   "redact": [
     "req.headers.authorization",
     "err.config.headers['x-api-key']",
+    "err.config.headers['x-gateway-apikey']",
   ],
   "serializers": {
     "err": [Function],
@@ -210,6 +211,7 @@ exports[`PinoLoggerOptionsBuilder must override level 1`] = `
   "redact": [
     "req.headers.authorization",
     "err.config.headers['x-api-key']",
+    "err.config.headers['x-gateway-apikey']",
   ],
   "serializers": {
     "err": [Function],
@@ -240,6 +242,7 @@ exports[`PinoLoggerOptionsBuilder must override pretty print 1`] = `
   "redact": [
     "req.headers.authorization",
     "err.config.headers['x-api-key']",
+    "err.config.headers['x-gateway-apikey']",
   ],
   "serializers": {
     "err": [Function],
@@ -278,6 +281,7 @@ exports[`PinoLoggerOptionsBuilder must use process.env that starts with BUILD_ 1
   "redact": [
     "req.headers.authorization",
     "err.config.headers['x-api-key']",
+    "err.config.headers['x-gateway-apikey']",
   ],
   "serializers": {
     "err": [Function],
@@ -308,6 +312,7 @@ exports[`PinoLoggerOptionsBuilder must use process.env.CONFIG_ENV if exists 1`] 
   "redact": [
     "req.headers.authorization",
     "err.config.headers['x-api-key']",
+    "err.config.headers['x-gateway-apikey']",
   ],
   "serializers": {
     "err": [Function],

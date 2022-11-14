@@ -141,6 +141,7 @@ export class PinoLoggerOptionsBuilder {
     return this.withRedactPaths(
       "req.headers.authorization",
       "err.config.headers['x-api-key']",
+      "err.config.headers['x-gateway-apikey']",
     );
   }
 
