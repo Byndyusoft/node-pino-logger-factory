@@ -115,7 +115,10 @@ export class PinoLoggerOptionsBuilder {
       function getMessageFromError(args) {
         const [o, ...n] = args as [Record<string, unknown>, ...unknown[]];
 
-        if (o.err instanceof Error && n.length === 0) {
+        if (
+          o.err instanceof Error &&
+          (n.length === 0 || (n.length === 1 && n[0] === undefined))
+        ) {
           return [o, o.err.message];
         }
 
