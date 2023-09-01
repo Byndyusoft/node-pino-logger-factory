@@ -86,6 +86,28 @@ describe("PinoLoggerOptionsBuilder", () => {
     expect(JSON.parse(stdout.output)).toMatchSnapshot();
   });
 
+  it("must log error with extra undefined argument", () => {
+    const error = new Error("some error");
+    error.stack = "Error: some error";
+
+    const extraArguments = [undefined];
+
+    const builder = new PinoLoggerOptionsBuilder();
+
+    stdout.start();
+
+    pino(builder.build()).error(
+      {
+        err: error,
+        context: "some context",
+      },
+      ...extraArguments,
+    );
+    stdout.stop();
+
+    expect(JSON.parse(stdout.output)).toMatchSnapshot();
+  });
+
   it("must log message", () => {
     const builder = new PinoLoggerOptionsBuilder();
 
