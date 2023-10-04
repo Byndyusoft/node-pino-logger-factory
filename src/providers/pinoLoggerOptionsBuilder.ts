@@ -123,8 +123,7 @@ export class PinoLoggerOptionsBuilder {
         // optionalParams[0] is undefined if log object in nest
         if (
           message.err instanceof Error &&
-          (optionalParams.length === 0 ||
-            (optionalParams.length === 1 && optionalParams[0] === undefined))
+          (optionalParams.length === 0 || optionalParams[0] === undefined)
         ) {
           return [message, message.err.message];
         }
