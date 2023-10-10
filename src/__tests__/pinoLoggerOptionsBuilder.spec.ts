@@ -86,6 +86,31 @@ describe("PinoLoggerOptionsBuilder", () => {
     expect(JSON.parse(stdout.output)).toMatchSnapshot();
   });
 
+  it("must log error with extra undefined argument", () => {
+    const error = new Error("some error");
+    error.stack = "Error: some error";
+
+    //only for nest logger in 9.3.0 and later
+    //first param is always undefined if not use params in log.error()
+    //if params in log.error() is set, then first extraArg mustn't be undefined
+    const extraArguments = [undefined];
+
+    const builder = new PinoLoggerOptionsBuilder();
+
+    stdout.start();
+
+    pino(builder.build()).error(
+      {
+        err: error,
+        context: "some context",
+      },
+      ...extraArguments,
+    );
+    stdout.stop();
+
+    expect(JSON.parse(stdout.output)).toMatchSnapshot();
+  });
+
   it("must log message", () => {
     const builder = new PinoLoggerOptionsBuilder();
 
