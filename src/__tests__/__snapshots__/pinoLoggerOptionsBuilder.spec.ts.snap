@@ -212,6 +212,18 @@ exports[`PinoLoggerOptionsBuilder must log object and message with args 1`] = `
 }
 `;
 
+exports[`PinoLoggerOptionsBuilder must log object with error level and undefined argument 1`] = `
+{
+  "env": "test",
+  "hostname": "host",
+  "level": "error",
+  "name": "object value",
+  "pid": 123456,
+  "time": "2016-04-05T17:02:19.796Z",
+  "version": "version",
+}
+`;
+
 exports[`PinoLoggerOptionsBuilder must override level 1`] = `
 {
   "base": {
