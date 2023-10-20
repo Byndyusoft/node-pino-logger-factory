@@ -140,7 +140,7 @@ export class PinoLoggerOptionsBuilder {
           message.errHash = murmurhash(message.err.stack ?? "").toString(16);
         }
 
-        if (optionalParams.length > 0) {
+        if (optionalParams.length > 0 && optionalParams[0] !== undefined) {
           message.msgTemplateHash = murmurhash(
             optionalParams[0] as string,
           ).toString(16);
