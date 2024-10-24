@@ -81,13 +81,15 @@ export class InfrastructureModule {}
 
 ### Custom serializers
 
-#### debugObjectSerializer
+- debugObjectSerializer
 
 Under the hood uses [util.inspect()](https://nodejs.org/api/util.html#utilinspectobject-options) for return human-readable a string representation values of object
 
-#### jsonDebugObjectSerializer
+- jsonDebugObjectSerializer
 
 Return JSON string representation values of object
+
+### Usage custom serializers
 
 Configure modules
 
@@ -109,9 +111,9 @@ import { LoggerModule } from "nestjs-pino";
           .withLogger(new PinoLoggerFactory().create())
           .withSerializers({
             debugData: debugObjectSerializer,
-            debugJsonData: jsonDebugObjectSerializer
+            debugJsonData: jsonDebugObjectSerializer,
           })
-        .build(),
+          .build(),
       }),
     }),
   ],
