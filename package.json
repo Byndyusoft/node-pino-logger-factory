@@ -103,7 +103,7 @@
     "opentracing": "^0.14.7",
     "pino": "^8.0.0",
     "pino-http": "^8.0.0",
-    "pino-pretty": "^8.0.0",
+    "pino-pretty": "^9.4.0",
     "pinst": "^3.0.0",
     "prettier": "^2.7.0",
     "prettier-plugin-packagejson": "^2.2.18",
