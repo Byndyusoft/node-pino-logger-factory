@@ -79,6 +79,65 @@ import { LoggerModule } from "nestjs-pino";
 export class InfrastructureModule {}
 ```
 
+### Custom serializers
+
+#### debugObjectSerializer
+
+Under the hood uses [util.inspect()](https://nodejs.org/api/util.html#utilinspectobject-options) for return human-readable a string representation values of object
+
+#### jsonDebugObjectSerializer
+
+Return JSON string representation values of object
+
+Configure modules
+
+```typescript
+import {
+  PinoHttpLoggerOptionsBuilder,
+  PinoLoggerFactory,
+  debugObjectSerializer,
+  jsonDebugObjectSerializer,
+} from "@byndyusoft/pino-logger-factory";
+import { Module } from "@nestjs/common";
+import { LoggerModule } from "nestjs-pino";
+
+@Module({
+  imports: [
+    LoggerModule.forRootAsync({
+      useFactory: () => ({
+        pinoHttp: new PinoHttpLoggerOptionsBuilder()
+          .withLogger(new PinoLoggerFactory().create())
+          .withSerializers({
+            debugData: debugObjectSerializer,
+          }),
+        debugJsonData: jsonDebugObjectSerializer.build(),
+      }),
+    }),
+  ],
+})
+export class InfrastructureModule {}
+```
+
+```typescript
+logger.info({
+  msg: "some message",
+  // the object whose fields you want to serialize to human-readable string representation
+  debugData: {
+    entity: {
+      id: 1,
+      orders: [1, 2],
+    },
+  },
+  // the object whose fields you want to serialize to JSON string representation
+  debugJsonData: {
+    entity: {
+      id: 1,
+      orders: [1, 2],
+    },
+  },
+});
+```
+
 ## Maintainers
 
 - [@Byndyusoft/owners](https://github.com/orgs/Byndyusoft/teams/owners) <<github.maintain@byndyusoft.com>>
