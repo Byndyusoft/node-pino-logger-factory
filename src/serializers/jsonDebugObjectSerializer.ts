@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Byndyusoft
+ * Copyright 2024 Byndyusoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,17 @@
  * limitations under the License.
  */
 
-export * from "./enums";
-export * from "./interfaces";
-export * from "./providers";
-export * from "./serializers";
+/*
+ * Returns a json representation of object for debugging.
+ * */
+export function jsonDebugObjectSerializer(
+  debugJsonData: Record<string, unknown>,
+): Record<string, unknown> {
+  const _debugJsonData: Record<string, unknown> = {};
+
+  for (const k of Object.keys(debugJsonData)) {
+    _debugJsonData[k] = JSON.stringify(debugJsonData[k]);
+  }
+
+  return _debugJsonData;
+}
