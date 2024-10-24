@@ -19,9 +19,9 @@ import { inspect } from "util";
 /*
  * Returns a string representation of object that is intended for debugging.
  * */
-export default function debugObjectSerializer(
+export const debugObjectSerializer = (
   debugData: Record<string, unknown>,
-): Record<string, unknown> {
+): Record<string, unknown> => {
   const _debugData: Record<string, unknown> = {};
 
   for (const k of Object.keys(debugData)) {
@@ -36,4 +36,4 @@ export default function debugObjectSerializer(
   }
 
   return _debugData;
-}
+};
