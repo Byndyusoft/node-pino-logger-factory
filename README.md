@@ -110,6 +110,7 @@ import { LoggerModule } from "nestjs-pino";
         pinoHttp: new PinoHttpLoggerOptionsBuilder()
           .withLogger(new PinoLoggerFactory().create())
           .withSerializers({
+            // you can use any name for key
             debugData: debugObjectSerializer,
             debugJsonData: jsonDebugObjectSerializer,
           })
