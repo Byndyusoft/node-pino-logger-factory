@@ -17,9 +17,9 @@
 /*
  * Returns a json representation of object for debugging.
  * */
-export function jsonDebugObjectSerializer(
+export const jsonDebugObjectSerializer = (
   debugJsonData: Record<string, unknown>,
-): Record<string, unknown> {
+): Record<string, unknown> => {
   const _debugJsonData: Record<string, unknown> = {};
 
   for (const k of Object.keys(debugJsonData)) {
@@ -27,4 +27,4 @@ export function jsonDebugObjectSerializer(
   }
 
   return _debugJsonData;
-}
+};
