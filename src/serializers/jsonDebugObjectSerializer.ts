@@ -17,7 +17,7 @@
 /*
  * Returns a json representation of object for debugging.
  * */
-export function jsonDebugObjectSerializer(
+export default function jsonDebugObjectSerializer(
   debugJsonData: Record<string, unknown>,
 ): Record<string, unknown> {
   const _debugJsonData: Record<string, unknown> = {};

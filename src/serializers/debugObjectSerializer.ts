@@ -19,7 +19,7 @@ import { inspect } from "util";
 /*
  * Returns a string representation of object that is intended for debugging.
  * */
-export function debugObjectSerializer(
+export default function debugObjectSerializer(
   debugData: Record<string, unknown>,
 ): Record<string, unknown> {
   const _debugData: Record<string, unknown> = {};
