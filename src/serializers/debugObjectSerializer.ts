@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Byndyusoft
+ * Copyright 2024 Byndyusoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,26 @@
  * limitations under the License.
  */
 
-export * from "./enums";
-export * from "./interfaces";
-export * from "./providers";
-export * from "./serializers";
+import { inspect } from "util";
+
+/*
+ * Returns a string representation of object that is intended for debugging.
+ * */
+export const debugObjectSerializer = (
+  debugData: Record<string, unknown>,
+): Record<string, unknown> => {
+  const _debugData: Record<string, unknown> = {};
+
+  for (const k of Object.keys(debugData)) {
+    const value = debugData[k];
+
+    _debugData[k] =
+      typeof debugData[k] === "string"
+        ? value
+        : inspect(value, {
+            depth: 5,
+          });
+  }
+
+  return _debugData;
+};
