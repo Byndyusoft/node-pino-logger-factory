@@ -108,31 +108,45 @@ export class PinoLoggerOptionsBuilder {
         return typeof args[0] === "object" ? args : [{}, ...args];
       },
       function fixErrorObject(args) {
-        const [o, ...n] = args;
+        const [message, ...optionalParams] = args;
 
-        return o instanceof Error ? [{ err: o }, ...n] : args;
+        return message instanceof Error
+          ? [{ err: message }, ...optionalParams]
+          : args;
       },
       function getMessageFromError(args) {
-        const [o, ...n] = args as [Record<string, unknown>, ...unknown[]];
+        const [message, ...optionalParams] = args as [
+          Record<string, unknown>,
+          ...unknown[],
+        ];
 
-        if (o.err instanceof Error && n.length === 0) {
-          return [o, o.err.message];
+        // optionalParams[0] is undefined if log object in nest
+        if (
+          message.err instanceof Error &&
+          (optionalParams.length === 0 || optionalParams[0] === undefined)
+        ) {
+          return [message, message.err.message];
         }
 
         return args;
       },
       function calculateHash(args) {
-        const [o, ...n] = args as [Record<string, unknown>, ...unknown[]];
+        const [message, ...optionalParams] = args as [
+          Record<string, unknown>,
+          ...unknown[],
+        ];
 
-        if (o.err instanceof Error) {
-          o.errHash = murmurhash(o.err.stack ?? "").toString(16);
+        if (message.err instanceof Error) {
+          message.errHash = murmurhash(message.err.stack ?? "").toString(16);
         }
 
-        if (n.length > 0) {
-          o.msgTemplateHash = murmurhash(n[0] as string).toString(16);
+        if (optionalParams.length > 0) {
+          message.msgTemplateHash = murmurhash(
+            optionalParams[0] as string,
+          ).toString(16);
         }
 
-        return [o, ...n];
+        return [message, ...optionalParams];
       },
     );
   }
