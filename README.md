@@ -109,8 +109,9 @@ import { LoggerModule } from "nestjs-pino";
           .withLogger(new PinoLoggerFactory().create())
           .withSerializers({
             debugData: debugObjectSerializer,
-          }),
-        debugJsonData: jsonDebugObjectSerializer.build(),
+            debugJsonData: jsonDebugObjectSerializer
+          })
+        .build(),
       }),
     }),
   ],
