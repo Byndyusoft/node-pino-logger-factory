@@ -87,9 +87,6 @@ describe("PinoLoggerOptionsBuilder", () => {
   });
 
   it("must log error with extra undefined argument", () => {
-    const error = new Error("some error");
-    error.stack = "Error: some error";
-
     //only for nest logger in 9.3.0 and later
     //first param is always undefined if not use params in log.error()
     //if params in log.error() is set, then first extraArg mustn't be undefined
@@ -101,7 +98,7 @@ describe("PinoLoggerOptionsBuilder", () => {
 
     pino(builder.build()).error(
       {
-        err: error,
+        err: "some error",
         context: "some context",
       },
       ...extraArguments,

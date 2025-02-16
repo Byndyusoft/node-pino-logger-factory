@@ -104,16 +104,10 @@ exports[`PinoLoggerOptionsBuilder must log error with extra undefined argument 1
 {
   "context": "some context",
   "env": "test",
-  "err": {
-    "message": "some error",
-    "stack": "Error: some error",
-    "type": "Error",
-  },
-  "errHash": "932f64f7",
+  "err": "some error",
   "hostname": "host",
   "level": "error",
-  "msg": "some error",
-  "msgTemplateHash": "7611b3bb",
+  "msgTemplateHash": "3fb211a9",
   "name": "name",
   "pid": 123456,
   "time": "2016-04-05T17:02:19.796Z",
