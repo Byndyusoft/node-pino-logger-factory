@@ -142,7 +142,7 @@ export class PinoLoggerOptionsBuilder {
 
         if (optionalParams.length > 0) {
           message.msgTemplateHash = murmurhash(
-            optionalParams[0] as string,
+            String(optionalParams[0]),
           ).toString(16);
         }
 
